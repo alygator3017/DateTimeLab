@@ -32,7 +32,7 @@ public class DateUtilities {
         }
         String fDate = null;
         try{
-        fDate = date.format(DateTimeFormatter.ISO_DATE);
+        fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         }catch(IllegalArgumentException e){
             System.out.println(e);
         }
@@ -82,7 +82,7 @@ public class DateUtilities {
         }
         String fDate = null;
         try{
-        fDate = date.format(DateTimeFormatter.ISO_DATE_TIME);
+        fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         }catch(IllegalArgumentException e){
             System.out.println(e);
         }
