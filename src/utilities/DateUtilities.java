@@ -3,8 +3,6 @@ package utilities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import javax.swing.text.DateFormatter;
 
 /**
  * Different Utility Methods for Date class conversions and mathematics. Uses
@@ -87,32 +85,106 @@ public class DateUtilities {
             throw new IllegalArgumentException("Date cannot be null");
         }
         String fDate = null;
-        try{
+        try {
             fDate = date.format(format);
-        }catch(IllegalArgumentException e ){
+        } catch (IllegalArgumentException e) {
             System.out.println(e + ", " + e.getMessage());
         }
         return fDate;
     }
-    
+
     /**
-     * Returns the LocalDate of a string. 
-     * Only for LocalDate, not LocalDateTime. This will only return a date, not 
-     * a date and time.  
-     * @param date a string date to be changed to a LocalTime.
+     * Returns the LocalDate of a string. Only for LocalDate, not LocalDateTime.
+     * This will only return a date, not a date and time.
+     *
+     * @param date a string date to be changed to a LocalDate.
      * @return LocalTime
      * @throws IllegalArgumentException
      */
-    public LocalDate toDate(String date)throws IllegalArgumentException{
-        if(date == null || date.isEmpty()){
+    public LocalDate toDate(String date) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
             throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
         }
-        LocalDate dDate = null;
-        try{
-            dDate = LocalDate.parse(date);
-        }catch(IllegalArgumentException e){
+        LocalDate parseDate = null;
+        try {
+            parseDate = LocalDate.parse(date);
+        } catch (IllegalArgumentException e) {
             System.out.println(e + ", " + e.getMessage());
         }
-        return dDate;
+        return parseDate;
     }
+
+    /**
+     * Returns the LocalDate of a string in the specified format. Only for
+     * LocalDate, not LocalDateTime. This will only return a date, not a date
+     * and time. Uses a specified DateTimeFormatter format.
+     *
+     * @param date a string date to be changed to a LocalDate.
+     * @param format specified format
+     * @return LocalTime
+     * @throws IllegalArgumentException
+     */
+    public LocalDate toDate(String date, DateTimeFormatter format) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
+            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+        } else if (format == null) {
+            throw new IllegalArgumentException("Format of type DateTimeFormatter cannot be null");
+        }
+        LocalDate parseDate = null;
+        try {
+            parseDate = LocalDate.parse(date, format);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e + ", " + e.getMessage());
+        }
+        return parseDate;
+    }
+
+    /**
+     * Returns the LocalDateTime of a string. Only for
+     * LocalDateTime, not LocalDate. This will return a date and time, not only
+     * a date.
+     *
+     * @param date a string date to be changed to a LocalDateTime.
+     * @return LocalTime
+     * @throws IllegalArgumentException
+     */
+    public LocalDateTime toDateTime(String date) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
+            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+        }
+        LocalDateTime parseDate = null;
+        try {
+            parseDate = LocalDateTime.parse(date);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e + ", " + e.getMessage());
+        }
+        return parseDate;
+    }
+
+    /**
+     * Returns the LocalDateTime of a string in the specified format. Only for
+     * LocalDateTime, not LocalDate. This will return a date and time, not only
+     * a date. Uses a specified DateTimeFormatter format.
+     *
+     * @param date a string date to be changed to a LocalDateTime.
+     * @param format specified format
+     * @return LocalTime
+     * @throws IllegalArgumentException
+     */
+    public LocalDateTime toDateTime(String date, DateTimeFormatter format) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
+            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+        } else if (format == null) {
+            throw new IllegalArgumentException("Format of type DateTimeFormatter cannot be null");
+        }
+        LocalDateTime parseDate = null;
+        try {
+            parseDate = LocalDateTime.parse(date, format);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e + ", " + e.getMessage());
+        }
+        return parseDate;
+    }
+
+    
 }
