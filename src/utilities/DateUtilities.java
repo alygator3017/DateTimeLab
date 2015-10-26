@@ -23,7 +23,7 @@ public class DateUtilities {
      * LocalDate parameter.
      *
      * @param date LocalDate
-     * @return date string
+     * @return date string of ISO_LOCAL_DATE
      * @throws IllegalArgumentException
      */
     public String toString(LocalDate date) throws IllegalArgumentException {
@@ -73,7 +73,7 @@ public class DateUtilities {
      * LocalDateTime parameter.
      *
      * @param date LocalDateTime
-     * @return date time String.
+     * @return date time String of ISO_LOCAL_DATE_TIME
      * @throws IllegalArgumentException
      */
     public String toString(LocalDateTime date) throws IllegalArgumentException {
