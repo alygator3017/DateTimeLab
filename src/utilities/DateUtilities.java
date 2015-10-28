@@ -19,34 +19,30 @@ public class DateUtilities {
 
     /**
      * Returns a String of a LocalDate object. Only for LocalDate, not
-     * LocalDateTime. This will return a date, not a date and time. Uses a
-     * LocalDate parameter.
+     * LocalDateTime. This will return a date, not a date and time. This will return 
+     * and ISO_LOCAL_DATE.
      *
-     * @param date LocalDate
-     * @return date string of ISO_LOCAL_DATE
+     * @param date date to be converted to string
+     * @return date of type ISO_LOCAL_DATE
      * @throws IllegalArgumentException
      */
     public String toString(LocalDate date) throws IllegalArgumentException {
         if (date == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
-        String fDate = null;
-        try{
-        fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        }catch(IllegalArgumentException e){
-            System.out.println(e);
-        }
+        String fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         return fDate;
     }
 
     /**
      * Returns a String of a LocalDate object formatted to the specified format.
      * Only for LocalDate, not LocalDateTime. This will return a date, not a
-     * date and time. Uses a LocalDate parameter. Also uses a DateTimeFormatter
-     * parameter to format the date passed in.
+     * date and time. Also uses a DateTimeFormatter
+     * parameter to format the date passed in. To format use 
+     * DateTimeFormatter.ofPattern("[insert pattern]").
      *
-     * @param date LocalDate
-     * @param format DateTimeFormatter ex:
+     * @param date date to be converted to string
+     * @param format Format in which date will be converted. ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY") or
      * DateTimeFormatter.ofPattern("M/d/YY"), etc.
      * @return formated date string
@@ -59,20 +55,16 @@ public class DateUtilities {
             throw new IllegalArgumentException("toString LocalDate DateTimeFromatter cannot be null");
         }
         String fDate = null;
-        try{
         fDate = date.format(format);
-        }catch(IllegalArgumentException e){
-            System.out.println(e);
-        }
         return fDate;
     }
 
     /**
      * Returns a String of a LocalDateTime object. Only for LocalDateTime, not
-     * LocalDate. This will return a date and time, not just a date. Uses a
-     * LocalDateTime parameter.
+     * LocalDate. This will return a date and time, not just a date. This will return 
+     * and ISO_LOCAL_DATE_TIME.
      *
-     * @param date LocalDateTime
+     * @param date Date time to be converted to a string.
      * @return date time String of ISO_LOCAL_DATE_TIME
      * @throws IllegalArgumentException
      */
@@ -80,22 +72,18 @@ public class DateUtilities {
         if (date == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
-        String fDate = null;
-        try{
-        fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        }catch(IllegalArgumentException e){
-            System.out.println(e);
-        }
+        String fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         return fDate;
     }
 
     /**
      * Returns a String of a LocalDateTime object. Only for LocalDateTime, not
-     * LocalDate. This will return a date and time, not just a date. Uses a
-     * LocalDateTime parameter.
+     * LocalDate. This will return a date and time, not just a date.  Also uses a DateTimeFormatter
+     * parameter to format the date passed in. To format use 
+     * DateTimeFormatter.ofPattern("[insert pattern]").
      *
-     * @param date LocalDateTime
-     * @param format DateTimeFormatter ex:
+     * @param date Date to be converted to a string.
+     * @param format Format in which date time will be converted. ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY hh:mm a") or
      * DateTimeFormatter.ofPattern("M/d/YY k:mm:ss"), etc.
      * @return formatted date time string.
@@ -105,12 +93,7 @@ public class DateUtilities {
         if (date == null || format == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
-        String fDate = null;
-        try {
-            fDate = date.format(format);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
+        String fDate = date.format(format);
         return fDate;
     }
 
@@ -118,7 +101,7 @@ public class DateUtilities {
      * Returns the LocalDate of a string. Only for LocalDate, not LocalDateTime.
      * This will only return a date, not a date and time.
      *
-     * @param date a string date to be changed to a LocalDate.
+     * @param date a string to be changed to a LocalDate.
      * @return LocalDate
      * @throws IllegalArgumentException
      */
@@ -126,25 +109,22 @@ public class DateUtilities {
         if (date == null || date.isEmpty()) {
             throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
         }
-        LocalDate parseDate = null;
-        try {
-            parseDate = LocalDate.parse(date);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
+        LocalDate parseDate = LocalDate.parse(date);
         return parseDate;
     }
 
     /**
      * Returns the LocalDate of a string in the specified format. Only for
      * LocalDate, not LocalDateTime. This will only return a date, not a date
-     * and time. Uses a specified DateTimeFormatter format.
+     * and time. Also uses a DateTimeFormatter
+     * parameter to format the date passed in. To format use 
+     * DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date a string date to be changed to a LocalDate.
-     * @param format specified format ex:
+     * @param format The specified format to be used. ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY") or
      * DateTimeFormatter.ofPattern("M/d/YY"), etc.
-     * @return LocalDate of a specified format
+     * @return A LocalDate of a specified format
      * @throws IllegalArgumentException
      */
     public LocalDate toDate(String date, DateTimeFormatter format) throws IllegalArgumentException {
@@ -166,30 +146,27 @@ public class DateUtilities {
      * Returns the LocalDateTime of a string. Only for LocalDateTime, not
      * LocalDate. This will return a date and time, not only a date.
      *
-     * @param date a string date to be changed to a LocalDateTime.
-     * @return LocalDateTime
+     * @param date A string date to be changed to a LocalDateTime.
+     * @return A LocalDateTime.
      * @throws IllegalArgumentException
      */
     public LocalDateTime toDateTime(String date) throws IllegalArgumentException {
         if (date == null || date.isEmpty()) {
             throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
         }
-        LocalDateTime parseDate = null;
-        try {
-            parseDate = LocalDateTime.parse(date);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
+        LocalDateTime parseDate = LocalDateTime.parse(date);
         return parseDate;
     }
 
     /**
      * Returns the LocalDateTime of a string in the specified format. Only for
      * LocalDateTime, not LocalDate. This will return a date and time, not only
-     * a date. Uses a specified DateTimeFormatter format.
+     * a date. Also uses a DateTimeFormatter
+     * parameter to format the date passed in. To format use 
+     * DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date a string date to be changed to a LocalDateTime.
-     * @param format specified format ex:
+     * @param format Specified format to be used for the LocalDateTime ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY hh:mm a") or
      * DateTimeFormatter.ofPattern("M/d/YY k:mm:ss"), etc.
      * @return LocalDateTime of a specified format
@@ -220,10 +197,10 @@ public class DateUtilities {
      * @param temporalUnit e.g. Days, months, etc. Anything less than a day is
      * not accepted and will throw an exception. Make sure to use a try catch to
      * catch any errors.
-     * @param firstDate LocalDate
-     * @param secondDate LocalDate
+     * @param firstDate starting LocalDate to be compared.
+     * @param secondDate ending LocalDate to be compared.
      * @return difference in firstDate and secondDate according to specified
-     * TemporalUnit
+     * TemporalUnit.
      * @throws IllegalArgumentException
      */
     public long dateDiff(TemporalUnit temporalUnit, LocalDate firstDate, LocalDate secondDate) throws IllegalArgumentException {
@@ -237,12 +214,7 @@ public class DateUtilities {
         LocalDate startDate = firstDate;
         LocalDate endDate = secondDate;
 
-        long diff = 0;
-        try {
-            diff = temporalUnit.between(startDate, endDate);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
+        Long diff = temporalUnit.between(startDate, endDate);
 
         return diff;
     }
@@ -254,10 +226,10 @@ public class DateUtilities {
      * Months, etc.)
      *
      * @param temporalUnit e.g. Days, months, etc.
-     * @param firstDate LocalDateTime
-     * @param secondDate LocalDateTime
+     * @param firstDate Starting LocalDateTime to be compared.
+     * @param secondDate Ending LocalDateTime to be compared.
      * @return difference in firstDate and secondDate according to specified
-     * TemporalUnit
+     * TemporalUnit.
      * @throws IllegalArgumentException
      */
     public long dateTimeDiff(TemporalUnit temporalUnit, LocalDateTime firstDate, LocalDateTime secondDate) throws IllegalArgumentException {
@@ -271,12 +243,7 @@ public class DateUtilities {
         LocalDateTime startDate = firstDate;
         LocalDateTime endDate = secondDate;
 
-        long diff = 0;
-        try {
-            diff = temporalUnit.between(startDate, endDate);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
+        long diff = temporalUnit.between(startDate, endDate);
 
         return diff;
     }
