@@ -19,8 +19,8 @@ public class DateUtilities {
 
     /**
      * Returns a String of a LocalDate object. Only for LocalDate, not
-     * LocalDateTime. This will return a date, not a date and time. This will return 
-     * and ISO_LOCAL_DATE.
+     * LocalDateTime. This will return a date, not a date and time. This will
+     * return and ISO_LOCAL_DATE.
      *
      * @param date date to be converted to string
      * @return date of type ISO_LOCAL_DATE
@@ -28,7 +28,7 @@ public class DateUtilities {
      */
     public String toString(LocalDate date) throws IllegalArgumentException {
         if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null");
+            throw new IllegalArgumentException();
         }
         String fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
         return fDate;
@@ -37,22 +37,23 @@ public class DateUtilities {
     /**
      * Returns a String of a LocalDate object formatted to the specified format.
      * Only for LocalDate, not LocalDateTime. This will return a date, not a
-     * date and time. Also uses a DateTimeFormatter
-     * parameter to format the date passed in. To format use 
-     * DateTimeFormatter.ofPattern("[insert pattern]").
+     * date and time. Also uses a DateTimeFormatter parameter to format the date
+     * passed in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date date to be converted to string
      * @param format Format in which date will be converted. ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY") or
-     * DateTimeFormatter.ofPattern("M/d/YY"), etc.
+     * DateTimeFormatter.ofPattern("M/d/YY"), etc. Please see API for String
+     * options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
      * @return formated date string
      * @throws IllegalArgumentException
      */
     public String toString(LocalDate date, DateTimeFormatter format) throws IllegalArgumentException {
         if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null");
+            throw new IllegalArgumentException();
         } else if (format == null) {
-            throw new IllegalArgumentException("toString LocalDate DateTimeFromatter cannot be null");
+            throw new IllegalArgumentException();
         }
         String fDate = null;
         fDate = date.format(format);
@@ -60,9 +61,39 @@ public class DateUtilities {
     }
 
     /**
+     * Returns a String of a LocalDate object formatted to the specified format.
+     * Only for LocalDate, not LocalDateTime. This will return a date, not a
+     * date and time. Also uses a DateTimeFormatter parameter to format the date
+     * passed in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
+     *
+     * @param date date to be converted to string
+     * @param format in which date will be converted. ex: "MM-dd-YYYY" or
+     * "M/d/YY", etc. Please see API for String options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+     * @return formated date string
+     * @throws IllegalArgumentException
+     */
+    public String toString(LocalDate date, String format) throws IllegalArgumentException {
+        if (date == null) {
+            throw new IllegalArgumentException();
+        } else if (format == null || format.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        DateTimeFormatter f = null;
+        try {
+            f = DateTimeFormatter.ofPattern(format);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+        String fDate = null;
+        fDate = date.format(f);
+        return fDate;
+    }
+
+    /**
      * Returns a String of a LocalDateTime object. Only for LocalDateTime, not
-     * LocalDate. This will return a date and time, not just a date. This will return 
-     * and ISO_LOCAL_DATE_TIME.
+     * LocalDate. This will return a date and time, not just a date. This will
+     * return and ISO_LOCAL_DATE_TIME.
      *
      * @param date Date time to be converted to a string.
      * @return date time String of ISO_LOCAL_DATE_TIME
@@ -70,7 +101,7 @@ public class DateUtilities {
      */
     public String toString(LocalDateTime date) throws IllegalArgumentException {
         if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null");
+            throw new IllegalArgumentException();
         }
         String fDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         return fDate;
@@ -78,14 +109,16 @@ public class DateUtilities {
 
     /**
      * Returns a String of a LocalDateTime object. Only for LocalDateTime, not
-     * LocalDate. This will return a date and time, not just a date.  Also uses a DateTimeFormatter
-     * parameter to format the date passed in. To format use 
+     * LocalDate. This will return a date and time, not just a date. Also uses a
+     * DateTimeFormatter parameter to format the date passed in. To format use
      * DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date Date to be converted to a string.
      * @param format Format in which date time will be converted. ex:
      * DateTimeFormatter.ofPattern("MM-dd-YYYY hh:mm a") or
-     * DateTimeFormatter.ofPattern("M/d/YY k:mm:ss"), etc.
+     * DateTimeFormatter.ofPattern("M/d/YY k:mm:ss"), etc. Please see API for
+     * String options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
      * @return formatted date time string.
      * @throws IllegalArgumentException
      */
@@ -94,6 +127,36 @@ public class DateUtilities {
             throw new IllegalArgumentException("Date cannot be null");
         }
         String fDate = date.format(format);
+        return fDate;
+    }
+
+    /**
+     * Returns a String of a LocalDateTime object. Only for LocalDateTime, not
+     * LocalDate. This will return a date and time, not just a date. Also uses a
+     * DateTimeFormatter parameter to format the date passed in. To format use
+     * DateTimeFormatter.ofPattern("[insert pattern]").
+     *
+     * @param date to be converted to a string.
+     * @param format in which date time will be converted. ex: "MM-dd-YYYY hh:mm
+     * a" or "M/d/YY k:mm:ss", etc. Please see API for String options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+     * @return formatted date time string.
+     * @throws IllegalArgumentException
+     */
+    public String toString(LocalDateTime date, String format) throws IllegalArgumentException {
+        if (date == null) {
+            throw new IllegalArgumentException();
+        } else if (format == null || format.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        DateTimeFormatter f = null;
+        try {
+            f = DateTimeFormatter.ofPattern(format);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+        String fDate = null;
+        fDate = date.format(f);
         return fDate;
     }
 
@@ -107,7 +170,7 @@ public class DateUtilities {
      */
     public LocalDate toDate(String date) throws IllegalArgumentException {
         if (date == null || date.isEmpty()) {
-            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+            throw new IllegalArgumentException();
         }
         LocalDate parseDate = LocalDate.parse(date);
         return parseDate;
@@ -116,9 +179,8 @@ public class DateUtilities {
     /**
      * Returns the LocalDate of a string in the specified format. Only for
      * LocalDate, not LocalDateTime. This will only return a date, not a date
-     * and time. Also uses a DateTimeFormatter
-     * parameter to format the date passed in. To format use 
-     * DateTimeFormatter.ofPattern("[insert pattern]").
+     * and time. Also uses a DateTimeFormatter parameter to format the date
+     * passed in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date a string date to be changed to a LocalDate.
      * @param format The specified format to be used. ex:
@@ -129,13 +191,47 @@ public class DateUtilities {
      */
     public LocalDate toDate(String date, DateTimeFormatter format) throws IllegalArgumentException {
         if (date == null || date.isEmpty()) {
-            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+            throw new IllegalArgumentException();
         } else if (format == null) {
-            throw new IllegalArgumentException("Format of type DateTimeFormatter cannot be null");
+            throw new IllegalArgumentException();
         }
         LocalDate parseDate = null;
         try {
             parseDate = LocalDate.parse(date, format);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        return parseDate;
+    }
+
+    /**
+     * Returns the LocalDate of a string in the specified format. Only for
+     * LocalDate, not LocalDateTime. This will only return a date, not a date
+     * and time. Also uses a DateTimeFormatter parameter to format the date
+     * passed in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
+     *
+     * @param date a string date to be changed to a LocalDate.
+     * @param format The specified format to be used. ex: "MM-dd-YYYY" or
+     * "M/d/YY", etc. Please see API for String options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+     * @return A LocalDate of a specified format
+     * @throws IllegalArgumentException
+     */
+    public LocalDate toDate(String date, String format) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (format == null || format.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        DateTimeFormatter f = null;
+        try {
+            f = DateTimeFormatter.ofPattern(format);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+        LocalDate parseDate = null;
+        try {
+            parseDate = LocalDate.parse(date, f);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -152,7 +248,7 @@ public class DateUtilities {
      */
     public LocalDateTime toDateTime(String date) throws IllegalArgumentException {
         if (date == null || date.isEmpty()) {
-            throw new IllegalArgumentException("String to local Date parameter cannot be null or empty.");
+            throw new IllegalArgumentException();
         }
         LocalDateTime parseDate = LocalDateTime.parse(date);
         return parseDate;
@@ -161,9 +257,8 @@ public class DateUtilities {
     /**
      * Returns the LocalDateTime of a string in the specified format. Only for
      * LocalDateTime, not LocalDate. This will return a date and time, not only
-     * a date. Also uses a DateTimeFormatter
-     * parameter to format the date passed in. To format use 
-     * DateTimeFormatter.ofPattern("[insert pattern]").
+     * a date. Also uses a DateTimeFormatter parameter to format the date passed
+     * in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
      *
      * @param date a string date to be changed to a LocalDateTime.
      * @param format Specified format to be used for the LocalDateTime ex:
@@ -183,6 +278,42 @@ public class DateUtilities {
             parseDate = LocalDateTime.parse(date, format);
         } catch (IllegalArgumentException e) {
             System.out.println(e + ", " + e.getMessage());
+        }
+        return parseDate;
+    }
+
+
+    /**
+     * Returns the LocalDateTime of a string in the specified format. Only for
+     * LocalDateTime, not LocalDate. This will return a date and time, not only
+     * a date. Also uses a DateTimeFormatter parameter to format the date passed
+     * in. To format use DateTimeFormatter.ofPattern("[insert pattern]").
+     *
+     * @param date a string date to be changed to a LocalDateTime.
+     * @param format The specified format to be used. ex: "M/d/YY k:mm:ss" or
+     * "M/d/YY k:mm:ss", etc. 
+     * Please see API for String options
+     * https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+     * @return LocalDateTime of a specified format
+     * @throws IllegalArgumentException
+     */
+    public LocalDate toDateTime(String date, String format) throws IllegalArgumentException {
+        if (date == null || date.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (format == null || format.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        DateTimeFormatter f = null;
+        try {
+            f = DateTimeFormatter.ofPattern(format);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+        LocalDate parseDate = null;
+        try {
+            parseDate = LocalDate.parse(date, f);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
         }
         return parseDate;
     }
